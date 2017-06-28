@@ -8,7 +8,21 @@ import java.util.Scanner;
 
 public class Fibonacci{
 	public static void main(String[] args) {
-		
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("number: ");
+		int userNum = scanner.nextInt();
+		int number = recursiveFibonacci(userNum);
+		System.out.println(number);
+	}
+
+	public static int recursiveFibonacci(int index){
+
+		//base case
+		if(index == 0 || index == 1)
+			return 1;
+		else
+			return recursiveFibonacci(index - 1) + recursiveFibonacci(index - 2);
+
 	}
 }
 
