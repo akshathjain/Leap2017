@@ -5,13 +5,8 @@ Purpose: Display panel for convex hull
 */
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DisplayPanel extends JPanel{
 	ArrayList<Point> pointList;
@@ -26,7 +21,7 @@ public class DisplayPanel extends JPanel{
 	@Override
 	public void paintComponent(Graphics g){
 		for(int i = 0; i < pointList.size(); i++)
-			g.fillRect(pointList.get(i).getX(), pointList.get(i).getY(), 5,5);
+			g.fillRect(pointList.get(i).getX(), pointList.get(i).getY(),5,5);
 
 		for(int i = 0; i < lineList.size(); i++)
 			g.drawLine(lineList.get(i).getStart().getX(), lineList.get(i).getStart().getY(), lineList.get(i).getEnd().getX(), lineList.get(i).getEnd().getY());
