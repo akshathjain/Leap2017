@@ -9,8 +9,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class DisplayPanel extends JPanel{
-	ArrayList<Point> pointList;
-	ArrayList<Line> lineList;
+	private final int VERTICAL_MARGIN = 30;
+	private final int HORIZONTAL_MARGIN = 30;
+	private ArrayList<Point> pointList;
+	private ArrayList<Line> lineList;
+	private Point center;
 
 	public DisplayPanel(){
 		super();
@@ -20,16 +23,28 @@ public class DisplayPanel extends JPanel{
 
 	@Override
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+
+		g.setColor(new Color(0,0,0));
 		for(int i = 0; i < pointList.size(); i++)
-			g.fillRect(pointList.get(i).getX(), pointList.get(i).getY(),5,5);
+			g.fillRect(pointList.get(i).getX() + HORIZONTAL_MARGIN, pointList.get(i).getY() + VERTICAL_MARGIN,5,5);
 
 		for(int i = 0; i < lineList.size(); i++)
-			g.drawLine(lineList.get(i).getStart().getX(), lineList.get(i).getStart().getY(), lineList.get(i).getEnd().getX(), lineList.get(i).getEnd().getY());
+			g.drawLine(lineList.get(i).getStart().getX() + HORIZONTAL_MARGIN, lineList.get(i).getStart().getY() + VERTICAL_MARGIN, lineList.get(i).getEnd().getX() + HORIZONTAL_MARGIN, lineList.get(i).getEnd().getY() + VERTICAL_MARGIN);
+
+		g.setColor(Color.BLUE);
+		if(center != null)
+			g.fillRect(center.getX() + HORIZONTAL_MARGIN, center.getY() + VERTICAL_MARGIN,5,5);
+
 	}
 
 	public void addPoint(int x, int y){
 		pointList.add(new Point(x,y));
 		repaint();
+	}
+
+	public void addCenter(int x, int y){
+		this.center = new Point(x, y);
 	}
 
 	public void connectPoints(int x1, int y1, int x2, int y2){
@@ -38,8 +53,9 @@ public class DisplayPanel extends JPanel{
 	}
 
 	public void clear(){
-		pointList.clear();
-		lineList.clear();
+		pointList = new ArrayList<>();
+		lineList = new ArrayList<>();
+		repaint();
 	}
 
 	private class Point{
