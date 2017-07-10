@@ -55,7 +55,7 @@ public class Solution{
 
         //turn the figure and find highest point from center
         ArrayList<Point> perimeter = new ArrayList<>();
-        for(int i = 0; i < 360; i++){
+        for(int i = 0; i < 360; i++){ //turns the shape one degree at a time
             double maxYDistance = -1; //negative one b/c impossible to have negative distance
             Point maxPoint = new Point(-1,-1);
             for(int j = 0; j < pointList.size(); j++){
