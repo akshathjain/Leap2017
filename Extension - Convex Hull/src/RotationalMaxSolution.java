@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.*;
 
-public class TriangleSolution{
+public class RotationalMaxSolution{
 
     private static ArrayList<Point> pointList;
 
@@ -63,34 +63,27 @@ public class TriangleSolution{
         }
 
         Point center = new Point((maxX - minX) / 2.0 + minX, (maxY - minY) / 2.0 + minY);
-        panel.addCenter((int)center.getX(), (int)center.getY());
+        panel.addSignificantPoint((int)center.getX(), (int)center.getY());
+        panel.addSignificantPoint((int)perimeter.get(0).getX(), (int)perimeter.get(0).getY());
 
         //now finish the hull
-        double rotationalCounter = perimeter.get(0).getAngle(center);
-        while(rotationalCounter < 360){
-            //find second rightMost point compared to the maxX
-            double mX = minX;
-            Point pX = null;
-            for(int i = 0; i < pointList.size(); i++){
-                Point current = pointList.get(i);
-                double[] turned = current.turn(-1 * rotationalCounter, distance(center, current), center);
-                if(turned[1] > perimeter.get(perimeter.size() - 1).turn(-1 * rotationalCounter, distance(center, perimeter.get(perimeter.size() - 1)), center)[1]){
-                    if(turned[0] > mX && turned[0] < maxX){
-                        mX = pointList.get(i).getX();
-                        pX = current;
-                    }
-                }
-            }
+        double maxArea = -1;
+        do{
 
-            perimeter.add(pX);
-            if(pX != null)
-               rotationalCounter = pX.getAngle(center);
-        }
+        }while(perimeter.get(perimeter.size() - 1) != )
 
         //paint lines
         perimeter.add(perimeter.get(0)); //in order to connect the first and last points
         for(int i = 0; i < perimeter.size() - 1; i++)
             panel.connectPoints((int)perimeter.get(i).getX(), (int)perimeter.get(i).getY(), (int)perimeter.get(i+1).getX(), (int)perimeter.get(i+1).getY());
+    }
+
+    public static double calcArea(Point p1, Point p2, Point p3){
+        double a = distance(p1, p2);
+        double b = distance(p2, p3);
+        double c = distance(p3, p1);
+        double s = (a + b + c) / 2;
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
     }
 
     public static double distance(Point p1, Point p2){
@@ -117,18 +110,16 @@ class Point{
     }
 
     public double getAngle(Point center){
-        return Math.atan((y - center.getY()) / (x - center.getX()));
+        double deg = 180.0 / Math.PI * Math.atan((y - center.getY()) / (x - center.getX()));
+        if(x - center.getX() < 0)
+            deg += 180;
+
+        return deg;
     }
 
     public double[] turn(double degrees, double radius, Point center){
         double radians = degrees * Math.PI / 180.0;
-        double thetaNot = getAngle(center);
-
-        //do a quadrant check and convert
-        if(x - center.getX() < 0)
-            thetaNot += Math.PI;
-        else if(y - center.getY() < 0)
-            thetaNot += 2 * Math.PI;
+        double thetaNot = getAngle(center) * Math.PI / 180.0;
 
         double thetaOne = thetaNot + radians;
         return new double[]{radius * Math.cos(thetaOne) + center.getX(), radius * Math.sin(thetaOne) + center.getY()};

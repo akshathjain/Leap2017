@@ -13,12 +13,13 @@ public class DisplayPanel extends JPanel{
 	private final int HORIZONTAL_MARGIN = 30;
 	private ArrayList<Point> pointList;
 	private ArrayList<Line> lineList;
-	private Point center;
+	private ArrayList<Point> significantPoint;;
 
 	public DisplayPanel(){
 		super();
 		pointList = new ArrayList<>();
 		lineList = new ArrayList<>();
+		significantPoint = new ArrayList<>();
 	}
 
 	@Override
@@ -33,8 +34,8 @@ public class DisplayPanel extends JPanel{
 			g.drawLine(lineList.get(i).getStart().getX() + HORIZONTAL_MARGIN, lineList.get(i).getStart().getY() + VERTICAL_MARGIN, lineList.get(i).getEnd().getX() + HORIZONTAL_MARGIN, lineList.get(i).getEnd().getY() + VERTICAL_MARGIN);
 
 		g.setColor(Color.BLUE);
-		if(center != null)
-			g.fillRect(center.getX() + HORIZONTAL_MARGIN, center.getY() + VERTICAL_MARGIN,5,5);
+		for(int i = 0; i < significantPoint.size(); i++)
+			g.fillRect(significantPoint.get(i).getX() + HORIZONTAL_MARGIN, significantPoint.get(i).getY() + VERTICAL_MARGIN,5,5);
 
 	}
 
@@ -43,8 +44,8 @@ public class DisplayPanel extends JPanel{
 		repaint();
 	}
 
-	public void addCenter(int x, int y){
-		this.center = new Point(x, y);
+	public void addSignificantPoint(int x, int y){
+		significantPoint.add(new Point(x, y));
 	}
 
 	public void connectPoints(int x1, int y1, int x2, int y2){

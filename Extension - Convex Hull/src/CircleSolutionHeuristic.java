@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.*;
 
-public class Solution{
+public class CircleSolutionHeuristic{
 
     private static ArrayList<Point> pointList;
 
