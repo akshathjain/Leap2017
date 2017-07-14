@@ -10,22 +10,17 @@ import java.util.Arrays;
 public class RadixSort{
 
 	public static void main(String[] args){
-		int[] ar = getRandom(1000000);
+		int[] ar = getRandom(1000);
 		int[] compAr = ar.clone();
 
-		long start = System.currentTimeMillis();
 		radixSort(ar);
-		System.out.println(System.currentTimeMillis() - start);
-
-		start = System.currentTimeMillis();
-		Arrays.sort(compAr);
-		System.out.println(System.currentTimeMillis() - start);
+		System.out.println(Arrays.toString(ar));
 	}
 
 	private static int[] getRandom(int size){
 		int[] temp = new int[size];
 		for(int i = 0; i < size; i++)
-			temp[i] = (int)(Math.random() * size);
+			temp[i] = -1 * (int)(Math.random() * size);
 		return temp;
 	}
 
