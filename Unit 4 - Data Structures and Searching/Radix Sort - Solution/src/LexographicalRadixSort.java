@@ -16,13 +16,9 @@ public class LexographicalRadixSort{
 	public static void main(String[] args) {
 		String[] dictionary = getDictionary("dictionary.txt");
 		String[] randomized = getRandomWords(dictionary, 100);
-		String[] computer = randomized.clone();
 
 		sort(randomized); //sorts the array
-		Arrays.sort(computer);
-
 		System.out.println(Arrays.toString(randomized));
-		System.out.println(Arrays.toString(computer));
 	}
 
 	public static String[] getDictionary(String fileName){
@@ -77,9 +73,8 @@ public class LexographicalRadixSort{
 
 	//returns the char at the @parameter place place from right to left (initial place starts at 0)
 	public static char getNth(String word, int longestWordLength, int place){
-		if(place >= word.length())
-			return word.charAt(word.length() - 1);
-
-		return word.charAt(word.length() - 1 - place);
+		if(place < longestWordLength - word.length())
+			return '`';
+		return word.charAt(word.length() - place + (longestWordLength - word.length()) - 1);
 	}
 }	
