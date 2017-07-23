@@ -27,7 +27,7 @@ public class RadixSort{
 		}
 
 		Integer[] sortedNeg = neg.toArray(new Integer[neg.size()]);
-		Integer[] sortedPos = pos.toArray(new Integer[pos.size()]);
+		Integer[] sortedPos = pos.toArray(new Integer[pos.size()]);run
 		radixSort(sortedNeg);
 		radixSort(sortedPos);
 
@@ -65,7 +65,7 @@ public class RadixSort{
 	private static int[] getRandom(int size){
 		int[] temp = new int[size];
 		for(int i = 0; i < size; i++)
-			temp[i] = (int)(Math.random() * size) - size/2;
+			temp[i] = (int)(Math.random() * 100) - size/2;
 		return temp;
 	}
 
