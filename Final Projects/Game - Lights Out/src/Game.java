@@ -101,7 +101,7 @@ public class Game extends JPanel implements MouseListener{
 	private boolean checkIfGameFinished(){
 		for(int i = 0; i < NUM_ROWS; i++){
 			for(int j = 0; j < NUM_COLUMNS; j++){
-				if(!board[i][j])
+				if(board[i][j])
 					return false;
 			}
 		}
