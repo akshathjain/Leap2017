@@ -30,7 +30,7 @@ public class Game extends JPanel implements MouseListener{
 		//initialize the board
 		board = new boolean[NUM_ROWS][NUM_COLUMNS];
 
-		for(int i = 0; i < (int)(Math.random() * NUM_ROWS * NUM_COLUMNS / 2) + 2; i++)
+		for(int i = 0; i < NUM_ROWS * NUM_COLUMNS; i++)
 			changeState((int)(Math.random() * NUM_ROWS), (int)(Math.random() * NUM_COLUMNS));
 
 		//add the mouse listeners
