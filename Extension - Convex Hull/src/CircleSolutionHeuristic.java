@@ -51,7 +51,7 @@ public class CircleSolutionHeuristic{
                 minY = pointList.get(i).getY();
         }
         Point center = new Point((maxX - minX) / 2.0 + minX, (maxY - minY) / 2.0 + minY);
-        panel.addCenter((int)center.getX(), (int)center.getY());
+        panel.addSignificantPoint((int)center.getX(), (int)center.getY());
 
         //turn the figure and find highest point from center
         ArrayList<Point> perimeter = new ArrayList<>();
@@ -85,40 +85,4 @@ public class CircleSolutionHeuristic{
         return Math.sqrt(Math.pow(p1.getX() - p2.getX(), 2) + Math.pow(p1.getY() - p2.getY(), 2));
     }
 
-}
-
-class Point{
-    private double x;
-    private double y;
-
-    public Point(double x, double y){
-        this.x = x;
-        this.y = y;
-    }
-
-    public double getX(){
-        return x;
-    }
-
-    public double getY(){
-        return y;
-    }
-
-    public double[] turn(double degrees, double radius, Point center){
-        double radians = degrees * Math.PI / 180.0;
-        double thetaNot = Math.atan((y - center.getY()) / (x - center.getX()));
-
-            //do a quadrant check and convert
-        if(x - center.getX() < 0)
-            thetaNot += Math.PI;
-
-        double thetaOne = thetaNot + radians;
-        return new double[]{radius * Math.cos(thetaOne) + center.getX(), radius * Math.sin(thetaOne) + center.getY()};
-    }
-
-    @Override
-    public boolean equals(Object o){
-        Point other = (Point) o;
-        return other.x == this.x && other.y == this.y;
-    }
 }
